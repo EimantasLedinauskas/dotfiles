@@ -13,7 +13,7 @@ export VISUAL="nvim"
 alias nvimd='nvim --noplugin -u NONE'  # launch nvim without any plugin or config
 
 # general aliases
-alias ls='ls -lah --color=auto'
+alias ls='ls -lh --color=auto'
 
 # pacman aliases
 alias paci='sudo pacman -S'  # install
