@@ -1,6 +1,6 @@
 # zsh
-export HISTFILE="$ZDOTDIR/.zhistory"  # history filepath
 export ZDOTDIR="$HOME/.dotfiles/zsh"
+export HISTFILE="$HOME/.zhistory"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
 export SAVEHIST=10000  # maximum events in history file
 setopt HIST_SAVE_NO_DUPS  # dont write a duplicate event to the history file
@@ -8,7 +8,7 @@ PROMPT="%n%B@%b%m:%B%~%b > "
 
 bindkey -v  # vi mode
 export KEYTIMEOUT=1  # faster switching between vi modes
-source "$ZDOTDIR/vi_mode_improvements"  # change cursor in insert and normal modes
+source "$ZDOTDIR/vi_mode_improvements.zsh"  # change cursor in insert and normal modes
 
 # edit command in nvim by pressing V in normal mode
 autoload -Uz edit-command-line
@@ -23,6 +23,11 @@ setopt PUSHD_IGNORE_DUPS  # do not store duplicates in the stack
 setopt PUSHD_SILENT  # do not print the directory stack after pushd or popd
 alias d='dirs -v'
 for index ({1..9}) alias "$index"="cd +${index}"; unset index  # alias for jumping in dir stack
+
+# XDG Paths
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
 
 # nvim
 export EDITOR="nvim"
@@ -41,7 +46,7 @@ export NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads;p:$HOME/Dropbox/phd"
 export NNN_PLUG="d:diffs;f:fzcd;o:fzopen;"
 export NNN_ARCHIVE="\\.(7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|rar|rpm|rz|t7z|tar|tbz|tbz2|tgz|tlz|txz|tZ|tzo|war|xpi|xz|Z|zip)$"
 export NNN_TRASH=1  # use trash cli
-source "$ZDOTDIR/nnn_cd_on_quit"  # change cursor in insert and normal modes
+source "$ZDOTDIR/nnn_cd_on_quit.zsh"  # change cursor in insert and normal modes
 
 # general aliases
 alias ls='ls --color=auto --group-directories-first -lh'
