@@ -22,5 +22,5 @@ create_symlink() {
     echo "Symbolic link created for $target"
 }
 
-create_symlink "$HOME/.dotfiles/zsh/zshrc" "$HOME/.zshrc"
+create_symlink "$HOME/.dotfiles/zsh/.zshrc" "$HOME/.zshrc"
 create_symlink "$HOME/.dotfiles/tmux/" "$HOME/.config/tmux"
