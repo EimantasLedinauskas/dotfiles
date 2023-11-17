@@ -8,6 +8,8 @@ shopt -s autocd  # cd then entering just path
 PS1='\e[32m\u@\h\e:\e[34m\W \e[31m>\e[0m '  # prompt
 
 set -o vi  # vi mode
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 
 # edit command in nvim by pressing <C-e> in normal mode
 source "$BDOTDIR/edit_command.sh"
