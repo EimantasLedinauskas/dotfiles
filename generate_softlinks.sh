@@ -24,3 +24,4 @@ create_symlink() {
 
 create_symlink "$HOME/.dotfiles/zsh/.zshrc" "$HOME/.zshrc"
 create_symlink "$HOME/.dotfiles/tmux/" "$HOME/.config/tmux"
+create_symlink "$HOME/.dotfiles/alacritty/" "$HOME/.config/alacritty"

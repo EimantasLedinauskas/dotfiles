@@ -7,7 +7,7 @@ export SAVEHIST=10000  # maximum events in history file
 setopt HIST_SAVE_NO_DUPS  # dont write a duplicate event to the history file
 setopt AUTO_CD  # do cd if just path without command is given
 unsetopt BEEP  # disable beeping
-PROMPT="%n%B@%b%m:%F{blue}%~%f %F{red}>%f "
+PROMPT="%F{green}%n%B@%b%m:%f%F{blue}%~%f %F{red}>%f "
 
 bindkey -v  # vi mode
 export KEYTIMEOUT=1  # faster switching between vi modes
