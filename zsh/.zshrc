@@ -44,7 +44,7 @@ source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # nnn
-alias N='sudo -E nnn -a -E -x -A -u'
+alias N='sudo -E nnn -a -E -x -A -u -C'
 export LC_COLLATE="C"
 export NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads;p:$HOME/Dropbox/phd"
 export NNN_PLUG="d:diffs;f:fzcd;o:fzopen;"

@@ -1,3 +1,6 @@
+window:
+  startup_mode: Maximized
+
 # Nightfox Alacritty Colors
 # Style: carbonfox
 # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/carbonfox/nightfox_alacritty.yml
