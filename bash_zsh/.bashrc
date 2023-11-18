@@ -4,8 +4,12 @@ export HISTFILE="$HOME/.bash_history"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
 export HISTFILESIZE=20000  # maximum events for internal history
 export HISTCONTROL=ignoreboth:erasedups  # dont write a duplicate event to the history file
+export HISTIGNORE="ls:bg:fg:exit:reset:clear"
 shopt -s autocd  # cd then entering just path
-PS1='\e[32m\u@\h\e:\e[34m\W \e[31m>\e[0m '  # prompt
+shopt -s histappend  # append to the history file, don't overwrite it
+shopt -s histverify  # dont execute history selection
+
+PS1='\e[32m\u@\h:\e[34m\W \e[31m>\e[0m '  # prompt
 
 set -o vi  # vi mode
 bind -m vi-command 'Control-l: clear-screen'
