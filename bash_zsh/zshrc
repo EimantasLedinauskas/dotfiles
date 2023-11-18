@@ -1,3 +1,5 @@
+source "$HOME/.dotfiles/bash_zsh/env_vars.sh"
+
 export SHELL="/bin/zsh"
 export HISTFILE="$HOME/.zhistory"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
@@ -33,5 +35,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
-# shared with bash options
-source "$HOME/.dotfiles/bash_zsh/shared.sh"
+# nn cd on quit
+source "$HOME/.dotfiles/bash_zsh/nnn_cd_on_quit.sh"
+
+# aliases
+source "$HOME/.dotfiles/bash_zsh/aliases.sh"

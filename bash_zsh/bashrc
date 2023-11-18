@@ -1,3 +1,17 @@
+source "$HOME/.dotfiles/bash_zsh/env_vars.sh"
+
+# start fish
+#   - checks if the parent process (PPID) is not fish. This prevents the script from executing fish when you're already in a fish shell
+#   - checks if the shell was not started with a command string, like bash -c command
+#   - checks if fish is available on the system
+if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && $(command -v fish) ]]
+then
+    shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
+    exec fish $LOGIN_OPTION
+fi
+
+# if fish is not available, then proceed with bash config
+
 export SHELL="/usr/bin/bash"
 export HISTFILE="$HOME/.bash_history"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
@@ -23,5 +37,8 @@ source /usr/share/fzf/key-bindings.bash
 source /usr/share/fzf/completion.bash
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
-# shared with zsh options
-source "$HOME/.dotfiles/bash_zsh/shared.sh"
+# nn cd on quit
+source "$HOME/.dotfiles/bash_zsh/nnn_cd_on_quit.sh"
+
+# aliases
+source "$HOME/.dotfiles/bash_zsh/aliases.sh"
