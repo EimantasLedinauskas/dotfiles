@@ -1,5 +1,4 @@
 export SHELL="/usr/bin/bash"
-export BDOTDIR="$HOME/.dotfiles/bash_zsh"
 export HISTFILE="$HOME/.bash_history"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
 export HISTFILESIZE=20000  # maximum events for internal history
@@ -16,7 +15,7 @@ bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 
 # edit command in nvim by pressing <C-e> in normal mode
-source "$BDOTDIR/edit_command.sh"
+source "$HOME/.dotfiles/bash_zsh/edit_command.sh"
 bind -x '"\C-e": edit_command_line'
 
 # fzf
@@ -25,4 +24,4 @@ source /usr/share/fzf/completion.bash
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # shared with zsh options
-source "$BDOTDIR/shared.sh"
+source "$HOME/.dotfiles/bash_zsh/shared.sh"

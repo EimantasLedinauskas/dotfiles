@@ -1,5 +1,4 @@
 export SHELL="/bin/zsh"
-export ZDOTDIR="$HOME/.dotfiles/bash_zsh"
 export HISTFILE="$HOME/.zhistory"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
 export SAVEHIST=20000  # maximum events in history file
@@ -10,7 +9,9 @@ PROMPT="%F{green}%n%B@%b%m:%f%F{blue}%~%f %F{red}>%f "
 
 bindkey -v  # vi mode
 export KEYTIMEOUT=1  # faster switching between vi modes
-source "$ZDOTDIR/vi_mode_improvements.zsh"  # change cursor in insert and normal modes
+source "$HOME/.dotfiles/bash_zsh/vi_mode_improvements.zsh"  # change cursor in insert and normal modes
+
+bindkey '^[[Z' reverse-menu-complete  # Shift-Tab for reverse order in completions
 
 # edit command in nvim by pressing <C-e> in normal mode
 autoload -Uz edit-command-line
@@ -33,4 +34,4 @@ source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 # shared with bash options
-source "$ZDOTDIR/shared.sh"
+source "$HOME/.dotfiles/bash_zsh/shared.sh"
