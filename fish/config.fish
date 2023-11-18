@@ -1,5 +1,4 @@
 set -g fish_greeting  # disable greeting
-fish_vi_key_bindings  # vi bindings
 function fish_mode_prompt; end  # disable default vi mode indicator
 
 # prompt
@@ -30,10 +29,19 @@ function fish_prompt
     set_color normal
 end
 
-# fzf
+# # enable Ctrl-f to accept suggestions in vi mode
+# function fish_user_key_bindings
+#     for mode in insert default
+#         bind -M $mode \cf forward-char
+#     end
+# end
+
+# fzf and keybindings
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 function fish_user_key_bindings
-	fzf_key_bindings
+    fzf_key_bindings
+    fish_vi_key_bindings  # vi bindings
+    bind -M insert \cf forward-char
 end
 
 # nnn cd on quit
