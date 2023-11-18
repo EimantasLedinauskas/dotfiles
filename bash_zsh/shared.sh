@@ -19,9 +19,11 @@ source "$HOME/.dotfiles/bash_zsh/nnn_cd_on_quit.sh"  # cd on quit
 
 # general aliases
 alias ..='cd ..'
+alias ...="cd ../.."
 alias cdc='cd ~/.dotfiles'  # to config directory
 alias ls='ls --color=auto --group-directories-first -lh'
 alias Find='sudo find / -name'  # global find by name
+alias mkdir='mkdir -p'  # create nested dirs
 
 # pacman aliases
 alias paci='sudo pacman -S'  # install
