@@ -1,6 +1,5 @@
 source "$HOME/.dotfiles/bash_zsh/env_vars.sh"
 
-export SHELL="/bin/zsh"
 export HISTFILE="$HOME/.zhistory"  # history filepath
 export HISTSIZE=10000  # maximum events for internal history
 export SAVEHIST=20000  # maximum events in history file
