@@ -22,10 +22,19 @@ create_symlink() {
     echo "Symbolic link created for $target"
 }
 
+# bash
 create_symlink "$HOME/.dotfiles/bash_zsh/bash_profile" "$HOME/.bash_profile"
 create_symlink "$HOME/.dotfiles/bash_zsh/inputrc" "$HOME/.inputrc"
 create_symlink "$HOME/.dotfiles/bash_zsh/bashrc" "$HOME/.bashrc"
-# create_symlink "$HOME/.dotfiles/bash_zsh/zshrc" "$HOME/.zshrc"
+
+# fish
 create_symlink "$HOME/.dotfiles/fish/config.fish" "$HOME/.config/fish/config.fish"
+
+# tmux
 create_symlink "$HOME/.dotfiles/tmux/" "$HOME/.config/tmux"
+
+# alacritty
 create_symlink "$HOME/.dotfiles/alacritty/" "$HOME/.config/alacritty"
+
+# nvim
+create_symlink "$HOME/.dotfiles/nvim/" "$HOME/.config/nvim"
