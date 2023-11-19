@@ -7,7 +7,8 @@ alias Find='sudo find / -name'  # global find by name
 alias mkdir='mkdir -p'  # create nested dirs
 
 # nvim
-alias nvimd='nvim --noplugin -u NONE'  # launch nvim without any plugin or config
+alias nvimd='nvim --cmd "lua vim.g.disable_plugins=true"'  # nvim without plugins but with config
+alias nvim0='nvim --noplugin -u NONE'  # nvim without config
 
 # nnn
 alias N='sudo -E nnn -a -E -x -A -u -C'

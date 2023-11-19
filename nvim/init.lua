@@ -5,7 +5,7 @@ vim.g.maplocalleader = ' '
 vim.wo.number = true  -- enable line numbers
 vim.o.mouse = 'a'  -- enable mouse mode
 vim.o.undofile = true  -- save undo history
-vim.wo.signcolumn = 'yes'  -- enable sign column
+-- vim.wo.signcolumn = 'yes'  -- enable sign column
 vim.o.completeopt = 'menuone,noselect'  -- better completion experience
 vim.o.termguicolors = true
 vim.o.clipboard = 'unnamedplus'  -- sync with system clipboard
@@ -186,3 +186,13 @@ vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"')
 
 -- search inside visually highlighted text (`silent = false` for it to make effect immediately)
 vim.keymap.set('x', 'g/', '<esc>/\\%V', { silent = false })
+
+
+-------------
+-- PLUGINS --
+-------------
+
+-- use `nvim --cmd "lua vim.g.disable_plugins=true"` to start without plugins
+if (vim.fn.exists("g:disable_plugins") == 0 and vim.fn.exists("g:vscode") == 0) then
+    require("plugins")
+end
