@@ -18,6 +18,7 @@ local lazy_opts = {}
 -- plugin spec
 local plugins = {}
 
+
 -- comments
 table.insert(plugins, {
     'numToStr/Comment.nvim',
@@ -26,11 +27,105 @@ table.insert(plugins, {
     end,
 })
 
+
+-- autocompletion
+table.insert(plugins, {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+        -- snippet engine & its associated nvim-cmp source
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+
+        -- cmp sources
+        'hrsh7th/cmp-nvim-lsp',
+    },
+    config = function()
+        local cmp = require 'cmp'
+        local luasnip = require 'luasnip'
+        require('luasnip.loaders.from_vscode').lazy_load()
+        luasnip.config.setup {}
+
+        cmp.setup {
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end,
+            },
+            completion = {
+                completeopt = 'menu,menuone,noinsert'
+            },
+            mapping = cmp.mapping.preset.insert {
+                ['<C-n>'] = cmp.mapping.select_next_item(),
+                ['<C-p>'] = cmp.mapping.select_prev_item(),
+                ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                ['<C-Space>'] = cmp.mapping.complete {},
+                ['<CR>'] = cmp.mapping.confirm {
+                    behavior = cmp.ConfirmBehavior.Replace,
+                    select = true,
+                },
+                ['<Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif luasnip.expand_or_locally_jumpable() then
+                        luasnip.expand_or_jump()
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+                ['<S-Tab>'] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    elseif luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { 'i', 's' }),
+            },
+            sources = {
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+            },
+        }
+    end,
+})
+
+
+-- fuzzy finder telescope
+table.insert(plugins, {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            build = 'make',
+            cond = function()
+                return vim.fn.executable 'make' == 1
+            end,
+        },
+    },
+    config = function()
+        pcall(require('telescope').load_extension, 'fzf')  -- Enable telescope fzf native, if installed
+
+        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
+        vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
+        vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files)
+        vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files)
+        vim.keymap.set('n', '<leader>ss', require('telescope.builtin').current_buffer_fuzzy_find)
+        vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags)
+        vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep)
+        vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics)
+        vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume)
+    end,
+})
+
+
 -- LSP
 table.insert(plugins, {
     'neovim/nvim-lspconfig',
     dependencies = {
-        -- Automatically install LSPs to stdpath for neovim
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
     },
@@ -45,12 +140,9 @@ table.insert(plugins, {
             nmap('<leader>rn', vim.lsp.buf.rename)
             nmap('<leader>ca', vim.lsp.buf.code_action)
 
-            -- nmap('gd', require('telescope.builtin').lsp_definitions)
-            -- nmap('gr', require('telescope.builtin').lsp_references)
-            -- nmap('gI', require('telescope.builtin').lsp_implementations)
-            -- nmap('<leader>D', require('telescope.builtin').lsp_type_definitions)
-            -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols)
-            -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols)
+            nmap('gd', require('telescope.builtin').lsp_definitions)
+            nmap('gr', require('telescope.builtin').lsp_references)
+            nmap('gI', require('telescope.builtin').lsp_implementations)
 
             nmap('K', vim.lsp.buf.hover)
             nmap('<C-k>', vim.lsp.buf.signature_help)
@@ -77,8 +169,8 @@ table.insert(plugins, {
         }
 
         -- -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-        -- local capabilities = vim.lsp.protocol.make_client_capabilities()
-        -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
         -- Ensure the servers above are installed
         local mason_lspconfig = require 'mason-lspconfig'
@@ -90,7 +182,7 @@ table.insert(plugins, {
         mason_lspconfig.setup_handlers {
             function(server_name)
                 require('lspconfig')[server_name].setup {
-                    -- capabilities = capabilities,
+                    capabilities = capabilities,
                     on_attach = on_attach,
                     settings = servers[server_name],
                     filetypes = (servers[server_name] or {}).filetypes,
@@ -101,4 +193,5 @@ table.insert(plugins, {
 })
 
 
+-- setup the plugins
 require("lazy").setup(plugins, lazy_opts)
