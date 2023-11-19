@@ -148,7 +148,8 @@ vim.keymap.set("x", "<A-j>", ":move '>+1<CR>gv-gv")
 vim.keymap.set("x", "<A-k>", ":move '<-2<CR>gv-gv")
 
 -- delete without putting to register
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+vim.keymap.set({'n', 'x'}, 'x', '"_x')
+vim.keymap.set({'n', 'x'}, 'X', '"_d')
 
 -- center view after jumping
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
