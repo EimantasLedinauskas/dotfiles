@@ -1,14 +1,14 @@
 -- bootstrap plugin manager (https://github.com/folke/lazy.nvim)
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  }
+    vim.fn.system {
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    }
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -24,7 +24,7 @@ table.insert(plugins, {
     "EdenEast/nightfox.nvim",
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'carbonfox'
+        vim.cmd.colorscheme 'carbonfox'
     end,
 })
 
@@ -62,17 +62,22 @@ table.insert(plugins, {
         },
     },
     config = function()
-        pcall(require('telescope').load_extension, 'fzf')  -- Enable telescope fzf native, if installed
+        pcall(require('telescope').load_extension, 'fzf') -- Enable telescope fzf native, if installed
 
-        vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles)
-        vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers)
-        vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files)
-        vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files)
-        vim.keymap.set('n', '<leader>ss', require('telescope.builtin').current_buffer_fuzzy_find)
-        vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags)
-        vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep)
-        vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics)
-        vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume)
+        local builtin = require('telescope.builtin')
+        local utils = require('telescope.utils')
+
+        vim.keymap.set('n', '<leader>?', builtin.oldfiles)
+        vim.keymap.set('n', '<leader><space>', builtin.buffers)
+        vim.keymap.set('n', '<leader>fg', builtin.git_files)
+        vim.keymap.set('n', '<leader>ff', function() builtin.find_files({ cwd = utils.buffer_dir() }) end )
+        vim.keymap.set('n', '<leader>fF', builtin.find_files)
+        vim.keymap.set('n', '<leader>ss', builtin.current_buffer_fuzzy_find)
+        vim.keymap.set('n', '<leader>sh', builtin.help_tags)
+        vim.keymap.set('n', '<leader>sg', function() builtin.live_grep({ cwd = utils.buffer_dir() }) end )
+        vim.keymap.set('n', '<leader>sG', builtin.live_grep)
+        vim.keymap.set('n', '<leader>sd', builtin.diagnostics)
+        vim.keymap.set('n', '<leader>sr', builtin.resume)
     end,
 })
 
@@ -87,7 +92,6 @@ table.insert(plugins, {
     config = function()
         --  This function gets run when an LSP connects to a particular buffer.
         local on_attach = function(_, bufnr)
-
             local nmap = function(keys, func)
                 vim.keymap.set('n', keys, func, { buffer = bufnr })
             end
@@ -108,29 +112,28 @@ table.insert(plugins, {
             end, { desc = 'Format current buffer with LSP' })
         end
 
+        -- Ensure the servers above are installed
         -- mason-lspconfig requires these functions called in this order before setting up servers
         require('mason').setup()
         require('mason-lspconfig').setup()
 
         local servers = {
             pylsp = {},
+            -- pyright = {},
             lua_ls = {
                 Lua = {
                     workspace = { checkThirdParty = false },
                     telemetry = { enable = false },
-                    diagnostics = { globals = {'vim'}, },  -- Get the language server to recognize the `vim` global
+                    diagnostics = { globals = { 'vim' }, }, -- Get the language server to recognize the `vim` global
                 },
             },
         }
 
-        -- Ensure the servers above are installed
-        local mason_lspconfig = require 'mason-lspconfig'
-
-        mason_lspconfig.setup {
+        require('mason-lspconfig').setup {
             ensure_installed = vim.tbl_keys(servers),
         }
 
-        mason_lspconfig.setup_handlers {
+        require('mason-lspconfig').setup_handlers {
             function(server_name)
                 require('lspconfig')[server_name].setup {
                     on_attach = on_attach,
@@ -147,7 +150,7 @@ table.insert(plugins, {
 table.insert(plugins, {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+        'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
     config = function()
@@ -155,9 +158,6 @@ table.insert(plugins, {
         vim.defer_fn(function()
             require('nvim-treesitter.configs').setup {
                 ensure_installed = { 'cpp', 'python', 'lua', 'vimdoc', 'vim', 'bash' },
-
-                auto_install = false,  -- autoinstall languages that are not installed?
-
                 highlight = { enable = true },
                 indent = { enable = true },
                 incremental_selection = {
@@ -165,7 +165,7 @@ table.insert(plugins, {
                     keymaps = {
                         init_selection = '<c-space>',
                         node_incremental = '<c-space>',
-                        scope_incremental = '<c-s>',
+                        -- scope_incremental = '<c-s>',
                         node_decremental = '<M-space>',
                     },
                 },
@@ -187,9 +187,6 @@ table.insert(plugins, {
                         enable = true,
                         swap_next = {
                             ['<leader>a'] = '@parameter.inner',
-                        },
-                        swap_previous = {
-                            ['<leader>A'] = '@parameter.inner',
                         },
                     },
                 },

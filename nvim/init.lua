@@ -37,9 +37,11 @@ vim.o.smartindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+-- disable timeout for key sequences
+vim.o.timeout = false
+
+-- command to delete trailing whitespace
+vim.api.nvim_create_user_command('TrimSpace', [[%s/\s\+$//e]], {})
 
 -- highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -58,12 +60,6 @@ vim.cmd([[autocmd FileType * set formatoptions-=ro]])
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
-
--- -- delete trailing whitespace on write
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---   pattern = { "*" },
---   command = [[%s/\s\+$//e]],
--- })
 
 -- wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
