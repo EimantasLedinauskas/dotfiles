@@ -13,6 +13,9 @@ alias nvim0='nvim --noplugin -u NONE'  # nvim without config
 # nnn
 alias N='sudo -E nnn -a -E -x -A -u -C'
 
+# lazygit
+alias g='lazygit'
+
 # pacman
 alias paci='sudo pacman -S'  # install
 alias pacs='pacman -Ss'  # search
