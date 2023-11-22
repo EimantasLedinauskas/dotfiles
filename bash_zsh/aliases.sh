@@ -24,3 +24,6 @@ alias pacr='sudo pacman -R'  # remove single
 alias pacrr='sudo pacman -Rs'  # remove with dependencies
 alias pacl='sudo pacman -Ql'  # list files installed by package
 alias pacb="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"  # browse
+
+# flatpak
+alias flatu='flatpak uninstall --unused; flatpak update'
