@@ -28,7 +28,7 @@ create_symlink "$HOME/.dotfiles/bash_zsh/inputrc" "$HOME/.inputrc"
 create_symlink "$HOME/.dotfiles/bash_zsh/bashrc" "$HOME/.bashrc"
 
 # fish
-create_symlink "$HOME/.dotfiles/fish/config.fish" "$HOME/.config/fish/config.fish"
+create_symlink "$HOME/.dotfiles/fish/" "$HOME/.config/fish"
 
 # tmux
 create_symlink "$HOME/.dotfiles/tmux/" "$HOME/.config/tmux"
