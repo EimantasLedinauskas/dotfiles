@@ -1,3 +1,10 @@
+# add ~/.local/bin to PATH (mostly for remote sessions)
+new_entry=$HOME/.local/bin  
+case ":$PATH:" in
+  *":$new_entry:"*) :;; # already there
+  *) PATH="$new_entry:$PATH";; # or PATH="$PATH:$new_entry"
+esac
+
 source "$HOME/.dotfiles/bash_zsh/env_vars.sh"
 
 # start fish only if:
