@@ -29,13 +29,6 @@ function fish_prompt
     set_color normal
 end
 
-# # enable Ctrl-f to accept suggestions in vi mode
-# function fish_user_key_bindings
-#     for mode in insert default
-#         bind -M $mode \cf forward-char
-#     end
-# end
-
 # fzf and keybindings
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 function fish_user_key_bindings
@@ -80,3 +73,8 @@ end
 
 # aliases shared with bash
 source $HOME/.dotfiles/bash_zsh/aliases.sh
+
+# emacs vterm integration
+if test "$INSIDE_EMACS" = 'vterm'; and test -n "$EMACS_VTERM_PATH"; and test -f "$EMACS_VTERM_PATH/etc/emacs-vterm.fish"
+    source $EMACS_VTERM_PATH/etc/emacs-vterm.fish
+end
