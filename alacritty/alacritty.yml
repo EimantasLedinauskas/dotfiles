@@ -2,6 +2,10 @@ window:
   startup_mode: Maximized
   decorations: none
 
+
+font:
+  size: 8.0
+
 # Nightfox Alacritty Colors
 # Style: carbonfox
 # Upstream: https://github.com/edeneast/nightfox.nvim/raw/main/extra/carbonfox/nightfox_alacritty.yml
