@@ -1,2 +1,3 @@
 bash_zsh/.zcompdump
 fish/fish_variables
+/bash_zsh/paths.sh
