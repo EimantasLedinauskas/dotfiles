@@ -195,6 +195,17 @@ table.insert(plugins, {
     end,
 })
 
+-- file manager
+table.insert(plugins, {
+    'stevearc/oil.nvim',
+    config = function()
+        vim.keymap.set("n", "-", "<CMD>Oil<CR>")
+        require("oil").setup({
+            columns = {"icon", "permissions", "size", "mtime"},
+            delete_to_trash = true,
+        })
+    end,
+})
 
 -- setup the plugins
 require("lazy").setup(plugins, lazy_opts)
