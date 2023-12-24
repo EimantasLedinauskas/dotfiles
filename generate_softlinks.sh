@@ -24,7 +24,7 @@ create_symlink() {
 
 # bash
 create_symlink "$HOME/.dotfiles/bash_zsh/bash_profile.sh" "$HOME/.bash_profile"
-create_symlink "$HOME/.dotfiles/bash_zsh/inputrc.sh" "$HOME/.inputrc"
+# create_symlink "$HOME/.dotfiles/bash_zsh/inputrc.sh" "$HOME/.inputrc"
 create_symlink "$HOME/.dotfiles/bash_zsh/bashrc.sh" "$HOME/.bashrc"
 
 # fish

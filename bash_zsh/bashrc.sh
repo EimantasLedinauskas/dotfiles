@@ -31,13 +31,13 @@ shopt -s histverify  # dont execute history selection
 
 PS1='\e[32m\u@\h:\e[34m\W \e[31m>\e[0m '  # prompt
 
-set -o vi  # vi mode
-bind -m vi-command 'Control-l: clear-screen'
-bind -m vi-insert 'Control-l: clear-screen'
+# set -o vi  # vi mode
+# bind -m vi-command 'Control-l: clear-screen'
+# bind -m vi-insert 'Control-l: clear-screen'
 
-# edit command in nvim by pressing <C-e> in normal mode
-source "$HOME/.dotfiles/bash_zsh/edit_command.sh"
-bind -x '"\C-e": edit_command_line'
+# edit command in text editor by pressing <C-e> in normal mode
+# source "$HOME/.dotfiles/bash_zsh/edit_command.sh"
+# bind -x '"\C-e": edit_command_line'
 
 # fzf
 source /usr/share/fzf/key-bindings.bash

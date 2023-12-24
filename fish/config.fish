@@ -10,21 +10,23 @@ function fish_prompt
     echo -n ':'
     set_color blue
     echo -n (prompt_pwd)
-
-    # vi mode indicator
     set_color red --bold
-    switch $fish_bind_mode
-        case insert
-            echo -n ' > '
-        case visual
-            echo -n ' V '
-        case replace
-            echo -n ' R '
-        case replace_one
-            echo -n ' r '
-        case default
-            echo -n ' N '
-    end
+    echo -n ' > '
+
+    # # vi mode indicator
+    # set_color red --bold
+    # switch $fish_bind_mode
+    #     case insert
+    #         echo -n ' > '
+    #     case visual
+    #         echo -n ' V '
+    #     case replace
+    #         echo -n ' R '
+    #     case replace_one
+    #         echo -n ' r '
+    #     case default
+    #         echo -n ' N '
+    # end
 
     set_color normal
 end
@@ -33,7 +35,7 @@ end
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 function fish_user_key_bindings
     bind -M insert \cf forward-char
-    fish_vi_key_bindings  # vi bindings
+    # fish_vi_key_bindings  # vi bindings
     fzf_key_bindings
 end
 
@@ -78,3 +80,17 @@ source $HOME/.dotfiles/bash_zsh/aliases.sh
 if test "$INSIDE_EMACS" = 'vterm'; and test -n "$EMACS_VTERM_PATH"; and test -f "$EMACS_VTERM_PATH/etc/emacs-vterm.fish"
     source $EMACS_VTERM_PATH/etc/emacs-vterm.fish
 end
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/eimantas/miniconda3/bin/conda
+    eval /home/eimantas/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/home/eimantas/miniconda3/etc/fish/conf.d/conda.fish"
+        . "/home/eimantas/miniconda3/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/home/eimantas/miniconda3/bin" $PATH
+    end
+end
+# <<< conda initialize <<<
+
