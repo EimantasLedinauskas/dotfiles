@@ -35,6 +35,7 @@ end
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 function fish_user_key_bindings
     bind -M insert \cf forward-char
+    fish_default_key_bindings
     # fish_vi_key_bindings  # vi bindings
     fzf_key_bindings
 end
