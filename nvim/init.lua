@@ -183,6 +183,10 @@ vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"')
 -- search inside visually highlighted text (`silent = false` for it to make effect immediately)
 vim.keymap.set('x', 'g/', '<esc>/\\%V', { silent = false })
 
+-- copy with Ctrl-C
+vim.keymap.set('x', '<C-c>', "y")
+vim.keymap.set('n', '<C-c>', "yy")
+
 
 -------------
 -- PLUGINS --
