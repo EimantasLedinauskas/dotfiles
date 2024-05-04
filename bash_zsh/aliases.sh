@@ -2,7 +2,7 @@
 alias ..='cd ..'
 alias ...="cd ../.."
 alias cdc='cd ~/.dotfiles'  # to config directory
-alias ls='ls --color=auto --group-directories-first -lh'
+alias ll='ls --color=auto --group-directories-first -lh'
 alias Find='sudo find / -name'  # global find by name
 alias mkdir='mkdir -p'  # create nested dirs
 alias cp='cp -i'  # ask before overwriting
