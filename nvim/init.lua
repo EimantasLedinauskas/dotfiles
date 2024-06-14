@@ -174,8 +174,8 @@ vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
 -- save file with <ctrl-S>
-vim.keymap.set({ "n" }, "<C-s>", "<Cmd>silent! update<CR>")
-vim.keymap.set({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update<CR>')
+vim.keymap.set({ "n" }, "<C-s>", "<Cmd>:w<CR>")
+vim.keymap.set({ 'i', 'x' }, '<C-S>', '<Esc><Cmd>:w<CR>')
 
 -- reselect latest changed, put, or yanked text
 vim.keymap.set('n', 'gV', '"`[" . strpart(getregtype(), 0, 1) . "`]"')

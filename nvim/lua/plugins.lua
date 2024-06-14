@@ -19,25 +19,6 @@ local lazy_opts = {}
 local plugins = {}
 
 
--- theme
-table.insert(plugins, {
-    "EdenEast/nightfox.nvim",
-    priority = 1000,
-    config = function()
-        vim.cmd.colorscheme 'carbonfox'
-    end,
-})
-
-
--- comments
-table.insert(plugins, {
-    'numToStr/Comment.nvim',
-    config = function()
-        require("Comment").setup()
-    end,
-})
-
-
 -- autocompletion
 table.insert(plugins, {
     'echasnovski/mini.completion',
